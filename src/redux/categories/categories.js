@@ -1,0 +1,1 @@
+const { checkStatus } = categories.actions
