@@ -1,3 +1,3 @@
 initialState = []
 
-const { addBook, removeBook } = books.actions
+export const { addBook, removeBook } = books.actions
