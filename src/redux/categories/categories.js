@@ -2,7 +2,11 @@ export const { checkStatus } = categories.actions;
 
 initialState = [];
 
-const checkReducers = (state = initialState, action) => {
+export const CheckStatus = () => ({
+  type: checkStatus,
+});
+
+export const checkReducers = (state = initialState, action) => {
   switch (action.type) {
     case checkStatus:
       return 'under construction';
@@ -10,3 +14,5 @@ const checkReducers = (state = initialState, action) => {
       return state;
   }
 };
+
+export default { checkStatus, checkReducers}
