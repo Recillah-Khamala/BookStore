@@ -1,3 +1,3 @@
-const { checkStatus } = categories.actions
+export const { checkStatus } = categories.actions
 
 initialState = []
