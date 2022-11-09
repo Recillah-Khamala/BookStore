@@ -1,13 +1,14 @@
-export const { addBook, removeBook } = books.actions;
+const addBook = 'redux/books/book/addBook';
+const removeBook = 'redux/books/book/removeBook';
 
-initialState = [];
+const initialState = [];
 
 const AddBook = (book) => ({
   type: addBook,
   book,
 });
 
-const RemoveBook = (book) => ({
+const RemoveBook = (id) => ({
   type: removeBook,
   id,
 });
@@ -23,4 +24,4 @@ export const bookReducers = (state = initialState, action) => {
   }
 };
 
-export default { bookReducers, AddBook, RemoveBook}
+export default { bookReducers, AddBook, RemoveBook };

@@ -1,6 +1,6 @@
-export const { checkStatus } = categories.actions;
+export const { checkStatus } = 'redux / categories / checkStatus';
 
-initialState = [];
+const initialState = [];
 
 export const CheckStatus = () => ({
   type: checkStatus,
@@ -15,4 +15,4 @@ export const checkReducers = (state = initialState, action) => {
   }
 };
 
-export default { checkStatus, checkReducers}
+export default { checkStatus, checkReducers };
