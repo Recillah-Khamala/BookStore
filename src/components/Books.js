@@ -1,16 +1,21 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { everyBook } from '../redux/books/books';
+import { useDispatch, useSelector } from 'react-redux';
+import { everyBook, removeBook } from '../redux/books/books';
 import Book from './Book';
 
 const Books = () => {
   const books = useSelector(everyBook);
+  const dispatch = useDispatch();
+
+  const removeHandler = (id) => {
+    dispatch(removeBook(id));
+  };
 
   return (
     <div className="flex flex-col gap-4 py-10">
       <div className="w-full">
-        {books.length > 0
-          && books.map((book) => {
+        {books.length > 0 ? (
+          books.map((book) => {
             const {
               id, title, author, category,
             } = book;
@@ -34,7 +39,11 @@ const Books = () => {
                     </li>
                     <li className="w-2 text-gray-300">|</li>
                     <li>
-                      <button type="button" className="text-sm font-thin">
+                      <button
+                        type="button"
+                        className="text-sm font-thin"
+                        onClick={() => removeHandler(id)}
+                      >
                         Remove
                       </button>
                     </li>
@@ -75,9 +84,13 @@ const Books = () => {
                 </div>
               </div>
             );
-          })}
+          })
+        ) : (
+          <p className="tect-blue=700, text-center">
+            Kindly add books to see them here!
+          </p>
+        )}
       </div>
-      {/* Form */}
     </div>
   );
 };
