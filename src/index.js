@@ -21,5 +21,5 @@ root.render(
         </Routes>
       </Router>
     </React.StrictMode>
-  </Provider>
+  </Provider>,
 );

@@ -1,23 +1,17 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { everyBook } from '../redux/books/books';
 import Book from './Book';
 import Form from './Form';
 
 const Books = () => {
-  const [bookSamples] = useState([
-    {
-      id: uuidv4(),
-      category: 'science',
-      title: 'The hunger games',
-      author: 'Suzanne Collins',
-    },
-  ]);
+  const books = useSelector(everyBook);
 
   return (
     <div className="flex flex-col gap-4 py-10">
       <div className="w-full">
-        {bookSamples.length > 0
-          && bookSamples.map((book) => {
+        {books.length > 0
+          && books.map((book) => {
             const {
               id, title, author, category,
             } = book;
@@ -28,7 +22,9 @@ const Books = () => {
               >
                 <div className="flex flex-col gap-2 w-1/3">
                   <div className="flex flex-col gap-1">
-                    <div className="text-gray-400 text-base capitalize font-semibold">{category}</div>
+                    <div className="text-gray-400 text-base capitalize font-semibold">
+                      {category}
+                    </div>
                     <Book info={{ title, author }} />
                   </div>
                   <ul className="flex gap-1 lg:gap-4 items-center w-8/12 lg:w-full">
