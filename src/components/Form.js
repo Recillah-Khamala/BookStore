@@ -2,13 +2,14 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { addBook } from '../redux/books/books';
+import Set from './Sticker';
 
-const Form = () => {
-  const { items, onChange } = Set();
-  const { title, author } = items;
+const FormInfo = () => {
+  const { values, onChange } = Set();
+  const { title, author } = values;
 
   const dispatch = useDispatch;
-
+  /* eslint-disable */
   const submitHandler = () => {
     const addNewBook = {
       id: uuidv4,
@@ -42,7 +43,7 @@ const Form = () => {
           <button
             type="submit"
             className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-600 text-white uppercase"
-            onClick={submitHandler}
+            onSubmit={submitHandler}
           >
             ADD BOOK
           </button>
@@ -52,4 +53,4 @@ const Form = () => {
   };
 };
 
-export default Form;
+export default FormInfo

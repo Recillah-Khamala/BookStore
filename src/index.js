@@ -2,24 +2,28 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { Provider } from 'react-redux';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Store from './redux/configureStore';
-import Books from './components/Books';
 import Categories from './components/Categories';
+import Books from './components/Books';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+    children: [
+      { path: '/', element: <Books /> },
+      { path: '/categories', element: <Categories /> },
+    ],
+  },
+]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Provider store={Store}>
-      <Router>
-        <Routes>
-          <Route element={<App />} path="/">
-            <Route element={<Books />} path="/" />
-            <Route element={<Categories />} path="/Categories" />
-          </Route>
-        </Routes>
-      </Router>
-    </Provider>
-  </React.StrictMode>,
+  <Provider store={Store}>
+    <RouterProvider router={router}>
+      <App />
+    </RouterProvider>
+  </Provider>,
 );
