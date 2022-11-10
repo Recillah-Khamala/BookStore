@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { everyBook, removeBook } from '../redux/books/books';
 import Book from './Book';
+import Form from './Form';
 
 const Books = () => {
   const books = useSelector(everyBook);
@@ -91,6 +92,7 @@ const Books = () => {
           </p>
         )}
       </div>
+      <Form />
     </div>
   );
 };
