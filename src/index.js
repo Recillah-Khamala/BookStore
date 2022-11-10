@@ -10,16 +10,16 @@ import Categories from './components/Categories';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Provider store={Store}>
-    <React.StrictMode>
+  <React.StrictMode>
+    <Provider store={Store}>
       <Router>
         <Routes>
           <Route element={<App />} path="/">
-            <Route element={<Books />} index />
+            <Route element={<Books />} path="/" />
             <Route element={<Categories />} path="/Categories" />
           </Route>
         </Routes>
       </Router>
-    </React.StrictMode>
-  </Provider>,
+    </Provider>
+  </React.StrictMode>,
 );
