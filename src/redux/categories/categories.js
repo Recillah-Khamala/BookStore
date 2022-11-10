@@ -1,18 +1,17 @@
-export const { checkStatus } = 'redux / categories / checkStatus';
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = [];
-
-export const CheckStatus = () => ({
-  type: checkStatus,
+const category = createSlice({
+  name: 'category',
+  initialState: null,
+  reducers: {
+    status: (state, action) => ({
+      ...state,
+      display: action.payload,
+    }),
+  },
 });
+export const { status } = category.actions;
 
-export const checkReducers = (state = initialState, action) => {
-  switch (action.type) {
-    case checkStatus:
-      return 'under construction';
-    default:
-      return state;
-  }
-};
+export const everyCategory = (state) => state.category;
 
-export default { checkStatus, checkReducers };
+export default category.reducer;
