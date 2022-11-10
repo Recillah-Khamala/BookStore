@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { everyBook, removeBook } from '../redux/books/books';
 import Book from './Book';
-import Form from './Form';
 
 const Books = () => {
-  const [bookSamples] = useState([
-    {
-      id: uuidv4(),
-      category: 'science',
-      title: 'The hunger games',
-      author: 'Suzanne Collins',
-    },
-  ]);
+  const books = useSelector(everyBook);
+  const dispatch = useDispatch();
+
+  const removeHandler = (id) => {
+    dispatch(removeBook(id));
+  };
 
   return (
     <div className="flex flex-col gap-4 py-10">
       <div className="w-full">
-        {bookSamples.length > 0
-          && bookSamples.map((book) => {
+        {books.length > 0 ? (
+          books.map((book) => {
             const {
               id, title, author, category,
             } = book;
@@ -28,7 +26,9 @@ const Books = () => {
               >
                 <div className="flex flex-col gap-2 w-1/3">
                   <div className="flex flex-col gap-1">
-                    <div className="text-gray-400 text-base capitalize font-semibold">{category}</div>
+                    <div className="text-gray-400 text-base capitalize font-semibold">
+                      {category}
+                    </div>
                     <Book info={{ title, author }} />
                   </div>
                   <ul className="flex gap-1 lg:gap-4 items-center w-8/12 lg:w-full">
@@ -39,7 +39,11 @@ const Books = () => {
                     </li>
                     <li className="w-2 text-gray-300">|</li>
                     <li>
-                      <button type="button" className="text-sm font-thin">
+                      <button
+                        type="button"
+                        className="text-sm font-thin"
+                        onClick={() => removeHandler(id)}
+                      >
                         Remove
                       </button>
                     </li>
@@ -80,10 +84,13 @@ const Books = () => {
                 </div>
               </div>
             );
-          })}
+          })
+        ) : (
+          <p className="tect-blue=700, text-center">
+            Kindly add books to see them here!
+          </p>
+        )}
       </div>
-      {/* Form */}
-      <Form />
     </div>
   );
 };
