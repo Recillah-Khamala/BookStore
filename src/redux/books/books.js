@@ -1,35 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { v4 as uuidv4 } from 'uuid';
+/* eslint-disable consistent-return */
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
+
+export const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/ZxXzbpNGqX1YGQ04jVqp/books';
+
+// const initialState = { books: {}, status: 'idle' };
+
+export const getData = createAsyncThunk(
+  'books/getBooks',
+  async () => {
+    try {
+      const fetchData = await axios.get(`${URL}`);
+      return fetchData.data;
+    } catch (error) {
+      return error?.response;
+    }
+  },
+);
 
 const bookSlice = createSlice({
   name: 'books',
-  initialState: [
-    {
-      id: uuidv4(),
-      title: 'The Smart parent',
-      aythor: 'Nancy Van Pelt',
-    },
-    {
-      id: uuidv4(),
-      title: 'Choose Your Hard',
-      aythor: 'Recillah Khamala',
-    },
-    {
-      id: uuidv4(),
-      title: 'The hunger games',
-      author: 'Suzanne Collins',
-    },
-    {
-      id: uuidv4(),
-      title: 'Dune',
-      author: 'Frank Herbert',
-    },
-    {
-      id: uuidv4(),
-      title: 'Capital in the Twenty-First Century',
-      author: 'Suzanne Collins',
-    },
-  ],
+  initialState: [],
 
   reducers: {
     addBook: (state, action) => [...state, action.payload],
