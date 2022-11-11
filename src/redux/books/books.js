@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/ZxXzbpNGqX1YGQ04jVqp/books';
 
-// const initialState = { books: {}, status: 'idle' };
+// const firstState = { books: {}, status: 'idle' };
 
 export const getData = createAsyncThunk(
   'books/getBooks',
@@ -12,6 +12,21 @@ export const getData = createAsyncThunk(
     try {
       const fetchData = await axios.get(`${URL}`);
       return fetchData.data;
+    } catch (error) {
+      return error?.response;
+    }
+  },
+);
+
+export const addData = createAsyncThunk(
+  'books/addbook',
+  async (firstState) => {
+    try {
+      const postBook = await axios.post(`${URL}`, firstState);
+      if (postBook.data === 'Created') {
+        const newData = await axios.get(URL);
+        return newData.data;
+      }
     } catch (error) {
       return error?.response;
     }
