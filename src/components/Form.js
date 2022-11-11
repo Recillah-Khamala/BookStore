@@ -1,31 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { addBook } from '../redux/books/books';
+import Set from './Sticker';
 
 const Form = () => {
-  const [title, setTitle] = useState('');
-  const [author, setAuthor] = useState('');
+  const { values, onChange } = Set();
   const dispatch = useDispatch();
 
-  const onChange = (e) => {
-    const {
-      target: { name, value },
-    } = e;
-    if (name === 'title') setTitle(value);
-    else if (name === 'author') setAuthor(value);
-  };
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-    const newBook = {
-      id: uuidv4,
+  const { title, author } = values;
+  const onSubmit = () => {
+    const book = {
+      id: uuidv4(),
       title,
       author,
     };
-    dispatch(addBook(newBook));
-    setAuthor('');
-    setTitle('');
+    dispatch(addBook(book));
   };
 
   return (
@@ -38,9 +28,9 @@ const Form = () => {
       </span>
       <input
         className="w-5/12 p-2 border rounded mr-4 font-light capitalize tracking-wider"
-        placeholder="Book title"
-        type="text"
         name="title"
+        type="text"
+        placeholder="Book title"
         onChange={(e) => onChange(e)}
         required
       />
@@ -53,9 +43,10 @@ const Form = () => {
         required
       />
       <button
-        type="submit"
+        type="button"
         className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-600 text-white uppercase"
-        onSubmit={submitHandler}
+        name="author"
+        onClick={onSubmit}
       >
         ADD BOOK
       </button>
