@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { everyBook, removeBook } from '../redux/books/books';
 import Book from './Book';
+import Form from './Form';
 
 const Books = () => {
   const books = useSelector(everyBook);
@@ -86,11 +87,12 @@ const Books = () => {
             );
           })
         ) : (
-          <p className="tect-blue=700, text-center">
-            Kindly add books to see them here!
+          <p className="text-white, text-center">
+            Kindly add books to be displayed them here!
           </p>
         )}
       </div>
+      <Form />
     </div>
   );
 };
