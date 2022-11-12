@@ -38,9 +38,9 @@ const Form = () => {
   return (
     <form
       action="#"
-      className="pt-16 w-10/12 mx-auto border-t border-t-gray-300 "
+      className="pt-8 mt-5 w-10/12 mx-auto border-t border-t-gray-300 "
     >
-      <span className="text-xl font-bold text-gray-400 block uppercase">
+      <span className="text-xl font-bold text-gray-400 block uppercase mb-4">
         add new book
       </span>
       <input
