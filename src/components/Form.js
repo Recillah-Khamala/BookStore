@@ -1,27 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
-import { addBook } from '../redux/books/books';
-import Set from './Sticker';
+import { addData } from '../redux/books/books';
 
 const Form = () => {
-  const { values, onChange } = Set();
+  const generateCategory = () => {
+    const categories = [
+      'Action',
+      'Drama',
+      'Fiction',
+      'Economy',
+      'Science Fiction',
+      'Money',
+    ];
+    const randomInd = Math.floor(Math.random() * 6);
+    return categories[randomInd];
+  };
   const dispatch = useDispatch();
 
-  const { title, author } = values;
-  const onSubmit = () => {
-    const book = {
-      id: uuidv4(),
-      title,
-      author,
-    };
-    dispatch(addBook(book));
+  const initialLocalState = { title: '', author: '' };
+
+  const [formData, setFormData] = useState(initialLocalState);
+
+  const addNewBook = () => {
+    if (formData.title.trim() && formData.author.trim()) {
+      const newBook = {
+        item_id: uuidv4(),
+        title: formData.title,
+        author: formData.author,
+        category: generateCategory(),
+      };
+      dispatch(addData(newBook));
+    }
+    setFormData(initialLocalState);
+  };
+
+  const onChange = (e) => {
+    setFormData((previousState) => {
+      const { name, value } = e.target;
+      return {
+        ...previousState,
+        [name]: value,
+      };
+    });
   };
 
   return (
     <form
       action="#"
-      className="pt-6 w-10/12 mx-auto border-t border-t-gray-300 pt-10 "
+      className="pt-16 w-10/12 mx-auto border-t border-t-gray-300 "
     >
       <span className="text-xl font-bold text-gray-400 block uppercase">
         add new book
@@ -31,7 +58,7 @@ const Form = () => {
         name="title"
         type="text"
         placeholder="Book title"
-        onChange={(e) => onChange(e)}
+        onChange={onChange}
         required
       />
       <input
@@ -39,14 +66,14 @@ const Form = () => {
         placeholder="Book author"
         type="text"
         name="author"
-        onChange={(e) => onChange(e)}
+        onChange={onChange}
         required
       />
       <button
         type="button"
         className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-600 text-white uppercase"
         name="author"
-        onClick={onSubmit}
+        onClick={() => addNewBook()}
       >
         ADD BOOK
       </button>
