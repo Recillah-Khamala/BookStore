@@ -1,25 +1,26 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { everyBook, removeBook } from '../redux/books/books';
+import { everyBook, getData, removeData } from '../redux/books/books';
 import Book from './Book';
 import Form from './Form';
 
 const Books = () => {
-  const books = useSelector(everyBook);
+  const { books, status } = useSelector(everyBook);
   const dispatch = useDispatch();
 
-  const removeHandler = (id) => {
-    dispatch(removeBook(id));
-  };
+  React.useEffect(() => {
+    if (status === 'idle') {
+      dispatch(getData());
+    }
+  }, [status, dispatch]);
 
   return (
     <div className="flex flex-col gap-4 py-10">
       <div className="w-full">
-        {books.length > 0 ? (
-          books.map((book) => {
-            const {
-              id, title, author, category,
-            } = book;
+        {status === 'successful' ? (
+          Object.entries(books).map((book) => {
+            const [id, bookDetails] = book;
+            const { title, author, category } = bookDetails[0];
             return (
               <div
                 key={id}
@@ -43,7 +44,7 @@ const Books = () => {
                       <button
                         type="button"
                         className="text-sm font-thin"
-                        onClick={() => removeHandler(id)}
+                        onClick={() => dispatch(removeData(id))}
                       >
                         Remove
                       </button>

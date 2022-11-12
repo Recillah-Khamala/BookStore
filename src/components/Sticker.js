@@ -1,15 +1,16 @@
 import { useState } from 'react';
 
 const Set = () => {
-  const [values, setValue] = useState({});
+  const [values, setValues] = useState({});
 
   const onChange = (e) => {
-    setValue({ ...values, [e.target.name]: e.target.value });
+    setValues({ ...values, [e.target.name]: e.target.value });
   };
 
   return {
     values,
     onChange,
+    setValues,
   };
 };
 
