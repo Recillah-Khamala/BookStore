@@ -4,59 +4,73 @@ import axios from 'axios';
 
 export const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/ZxXzbpNGqX1YGQ04jVqp/books';
 
-// const firstState = { books: {}, status: 'idle' };
+const initialState = { books: {}, status: 'idle' };
 
-export const getBook = createAsyncThunk(
-  'books/getBooks',
-  async () => {
-    try {
-      const fetchBook = await axios.get(`${URL}`);
-      return fetchBook.data;
-    } catch (error) {
-      return error?.response;
-    }
-  },
-);
+export const getData = createAsyncThunk('books/getBooks', async () => {
+  try {
+    const initialState = await axios.get(`${URL}`);
+    return initialState.data;
+  } catch (error) {
+    return error?.response;
+  }
+});
 
-export const addBook = createAsyncThunk(
-  'books/addbook',
-  async (firstState) => {
-    try {
-      const postBook = await axios.post(`${URL}`, firstState);
-      if (postBook.data === 'Created') {
-        const newBook = await axios.get(URL);
-        return newBook.data;
-      }
-    } catch (error) {
-      return error?.response;
+export const addData = createAsyncThunk('books/addbook', async (firstState) => {
+  try {
+    const postData = await axios.post(`${URL}`, firstState);
+    if (postData.data === 'Created') {
+      const newData = await axios.get(URL);
+      return newData.data;
     }
-  },
-);
+  } catch (error) {
+    return error?.response;
+  }
+});
 
-export const removeBook = createAsyncThunk(
-  'books/removeBook',
-  async (id) => {
-    try {
-      const response = await axios.delete(`${URL}/${id}`);
-      if (response.data === 'The book was deleted successfully!') {
-        const res = await axios.get(URL);
-        return res.data;
-      }
-    } catch (error) {
-      return error?.response;
+export const removeData = createAsyncThunk('books/removeBook', async (id) => {
+  try {
+    const response = await axios.delete(`${URL}/${id}`);
+    if (response.data === 'The book was deleted successfully!') {
+      const res = await axios.get(URL);
+      return res.data;
     }
-  },
-);
+  } catch (error) {
+    return error?.response;
+  }
+});
 
 const bookSlice = createSlice({
   name: 'books',
-  initialState: [],
-
+  initialState,
+  extraReducers(builder) {
+    builder
+      .addCase(getData.pending, (state) => {
+        const st = state;
+        st.status = 'pending';
+      })
+      .addCase(getData.fulfilled, (state, action) => {
+        const st = state;
+        st.status = 'Successful';
+        st.books = action.payload;
+      })
+      .addCase(addData.fulfilled, (state, action) => {
+        const st = state;
+        st.status = 'Successful';
+        st.books = action.payload;
+      })
+      .addCase(removeData.fulfilled, (state, action) => {
+        const st = state;
+        st.status = 'Successful';
+        st.books = action.payload;
+      });
+  },
   reducers: {
     addBook: (state, action) => [...state, action.payload],
     removeBook: (state, action) => state.filter((book) => book.id !== action.payload),
   },
 });
+
+export const { addBook, removeBook } = bookSlice.actions;
 
 export const everyBook = (state) => state.books;
 
