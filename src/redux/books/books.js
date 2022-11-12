@@ -50,17 +50,17 @@ const bookSlice = createSlice({
       })
       .addCase(getData.fulfilled, (state, action) => {
         const st = state;
-        st.status = 'Successful';
+        st.status = 'successful';
         st.books = action.payload;
       })
       .addCase(addData.fulfilled, (state, action) => {
         const st = state;
-        st.status = 'Successful';
+        st.status = 'successful';
         st.books = action.payload;
       })
       .addCase(removeData.fulfilled, (state, action) => {
         const st = state;
-        st.status = 'Successful';
+        st.status = 'successful';
         st.books = action.payload;
       });
   },

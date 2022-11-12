@@ -7,11 +7,11 @@ import Form from './Form';
 const Books = () => {
   const { books, status } = useSelector(everyBook);
   const dispatch = useDispatch();
-  console.log('books', books);
-  console.log('status', status)
 
   React.useEffect(() => {
-    dispatch(getData());
+    if (status === 'idle') {
+      dispatch(getData());
+    }
   }, [status, dispatch]);
 
   return (
