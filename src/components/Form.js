@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { addData } from '../redux/books/books';
+import Set from './Sticker';
 
 const Form = () => {
   const generateCategory = () => {
@@ -16,33 +17,22 @@ const Form = () => {
     const randomInd = Math.floor(Math.random() * 6);
     return categories[randomInd];
   };
+
+  const { values, onChange, setValues } = Set();
   const dispatch = useDispatch();
 
   const initialLocalState = { title: '', author: '' };
 
-  const [formData, setFormData] = useState(initialLocalState);
-
-  const addNewBook = () => {
-    if (formData.title.trim() && formData.author.trim()) {
-      const newBook = {
-        item_id: uuidv4(),
-        title: formData.title,
-        author: formData.author,
-        category: generateCategory(),
-      };
-      dispatch(addData(newBook));
-    }
-    setFormData(initialLocalState);
-  };
-
-  const onChange = (e) => {
-    setFormData((previousState) => {
-      const { name, value } = e.target;
-      return {
-        ...previousState,
-        [name]: value,
-      };
-    });
+  const { title, author } = values;
+  const onSubmit = () => {
+    const newBook = {
+      item_id: uuidv4(),
+      title,
+      author,
+      category: generateCategory(),
+    };
+    dispatch(addData(newBook));
+    setValues(initialLocalState);
   };
 
   return (
@@ -57,23 +47,24 @@ const Form = () => {
         className="w-5/12 p-2 border rounded mr-4 font-light capitalize tracking-wider"
         name="title"
         type="text"
+        value={title}
         placeholder="Book title"
-        onChange={onChange}
+        onChange={(e) => onChange(e)}
         required
       />
       <input
         className="w-4/12 p-2 border rounded mr-4 font-light capitalize tracking-wider"
         placeholder="Book author"
         type="text"
+        value={author}
         name="author"
-        onChange={onChange}
+        onChange={(e) => onChange(e)}
         required
       />
       <button
         type="button"
         className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-600 text-white uppercase"
-        name="author"
-        onClick={() => addNewBook()}
+        onClick={onSubmit}
       >
         ADD BOOK
       </button>
