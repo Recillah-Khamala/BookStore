@@ -5,12 +5,12 @@ const Book = (data) => {
   const { title, author, category } = info;
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="flex flex-col">
       <h4 className="text-slate-300 text-base">{category}</h4>
-      <h2 className="text-xl font-semibold tracking-wider capitalize">
+      <h2 className="text-2xl font-bold text-zinc-800 capitalize">
         {title}
       </h2>
-      <h6 className="text-blue-700 font-normal capitalize">{author}</h6>
+      <h6 className="text-blue-500 opacity-80 font-normal capitalize">{author}</h6>
     </div>
   );
 };

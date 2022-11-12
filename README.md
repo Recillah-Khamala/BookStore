@@ -22,7 +22,7 @@
 
 - Clone this repo to your local machine
   -  `git@github.com:Rn486/BookStore.git`
-  - Open the folder "Book-Store" and run `npm install` to install all necesary scripts,
+  - Open the folder "Book-Store" and run `npm install`( and npm install --legacy-peer-deps if necessary) to install all necesary scripts,
   - Run from your termminal, `npm start` to open the project in your browser.
 
 **This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).**
@@ -89,4 +89,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](./LICENSE.md) licensed.

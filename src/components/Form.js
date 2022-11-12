@@ -38,9 +38,9 @@ const Form = () => {
   return (
     <form
       action="#"
-      className="pt-16 w-10/12 mx-auto border-t border-t-gray-300 "
+      className="pt-8 mt-5 w-10/12 mx-auto border-t border-t-gray-300 "
     >
-      <span className="text-xl font-bold text-gray-400 block uppercase">
+      <span className="text-xl font-bold text-gray-400 block uppercase mb-4">
         add new book
       </span>
       <input
@@ -63,7 +63,7 @@ const Form = () => {
       />
       <button
         type="button"
-        className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-600 text-white uppercase"
+        className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-500 opacity-90 text-white uppercase"
         onClick={onSubmit}
       >
         ADD BOOK
