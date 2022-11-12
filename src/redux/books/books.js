@@ -6,26 +6,41 @@ export const URL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/b
 
 // const firstState = { books: {}, status: 'idle' };
 
-export const getData = createAsyncThunk(
+export const getBook = createAsyncThunk(
   'books/getBooks',
   async () => {
     try {
-      const fetchData = await axios.get(`${URL}`);
-      return fetchData.data;
+      const fetchBook = await axios.get(`${URL}`);
+      return fetchBook.data;
     } catch (error) {
       return error?.response;
     }
   },
 );
 
-export const addData = createAsyncThunk(
+export const addBook = createAsyncThunk(
   'books/addbook',
   async (firstState) => {
     try {
       const postBook = await axios.post(`${URL}`, firstState);
       if (postBook.data === 'Created') {
-        const newData = await axios.get(URL);
-        return newData.data;
+        const newBook = await axios.get(URL);
+        return newBook.data;
+      }
+    } catch (error) {
+      return error?.response;
+    }
+  },
+);
+
+export const removeBook = createAsyncThunk(
+  'books/removeBook',
+  async (id) => {
+    try {
+      const response = await axios.delete(`${URL}/${id}`);
+      if (response.data === 'The book was deleted successfully!') {
+        const res = await axios.get(URL);
+        return res.data;
       }
     } catch (error) {
       return error?.response;
@@ -42,8 +57,6 @@ const bookSlice = createSlice({
     removeBook: (state, action) => state.filter((book) => book.id !== action.payload),
   },
 });
-
-export const { addBook, removeBook } = bookSlice.actions;
 
 export const everyBook = (state) => state.books;
 
