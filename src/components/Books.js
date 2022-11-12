@@ -30,14 +30,14 @@ const Books = () => {
               >
                 <div className="flex flex-col w-1/2">
                   <div className="flex flex-col gap-1">
-                    <div className="text-gray-400 text-base capitalize font-semibold">
+                    <div className="text-gray-400 text-base capitalize font-bold">
                       {category}
                     </div>
                     <Book info={{ title, author }} />
                   </div>
                   <ul className="flex gap-1 lg:gap-4 items-center w-8/12 lg:w-full">
                     <li>
-                      <button type="button" className="text-sm font-thin">
+                      <button type="button" className="text-sm font-thin text-blue-500 opacity-90">
                         Comments
                       </button>
                     </li>
@@ -45,7 +45,7 @@ const Books = () => {
                     <li>
                       <button
                         type="button"
-                        className="text-sm font-thin"
+                        className="text-sm font-thin text-blue-500 opacity-90"
                         onClick={() => dispatch(removeData(id))}
                       >
                         Remove
@@ -53,7 +53,7 @@ const Books = () => {
                     </li>
                     <li className="w-2 text-gray-300">|</li>
                     <li>
-                      <button type="button" className="text-sm font-thin">
+                      <button type="button" className="text-sm font-thin text-blue-500 opacity-90">
                         Edit
                       </button>
                     </li>
@@ -81,7 +81,7 @@ const Books = () => {
                     <p className="font-normal">Introduction</p>
                     <button
                       type="button"
-                      className="bg-blue-700 uppercase text-xs lg:text-base font-thin p-2 text-white w-full lg:w-10/12"
+                      className="bg-blue-500 opacity-90 uppercase text-xs lg:text-base font-thin p-2 text-white w-full lg:w-10/12"
                     >
                       update progress
                     </button>

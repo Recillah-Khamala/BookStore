@@ -63,7 +63,7 @@ const Form = () => {
       />
       <button
         type="button"
-        className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-600 text-white uppercase"
+        className="py-2 px-14 rounded-md text-sm ml-2 bg-blue-500 opacity-90 text-white uppercase"
         onClick={onSubmit}
       >
         ADD BOOK

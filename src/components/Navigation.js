@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 const Navigation = () => (
   <header className="flex justify-between items-center lg:px-24 lg:mx-2 py-5 shadow-sm shadow-gray-200">
     <nav className="flex items-center gap-6 lg:gap-10">
-      <h1 className="text-3xl lg:text-4xl text-blue-700 font-bold">
+      <h1 className="text-3xl lg:text-4xl text-blue-500 opacity-90 font-bold">
         <Link to="/">Bookstore CMS</Link>
       </h1>
       <ul className="flex gap-8">
